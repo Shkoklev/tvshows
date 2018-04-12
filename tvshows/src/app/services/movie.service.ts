@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ResponseResult} from "../models/tvshows";
+import {ResponseResult, Show, Episode} from "../models/tvshows";
 import {Observable} from "rxjs";
 import {of} from "rxjs/observable/of";
 import {catchError} from "rxjs/operators/catchError";
@@ -13,13 +13,24 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   search(query: string): Observable<ResponseResult[]> {
-    if(!query.trim()) {
-      return of([]);
-    }
     return this.http.get<ResponseResult[]>(`${MovieService.moviesUrl}/search/shows?q=${query}`)
       .pipe(
         catchError(this.handleError<ResponseResult[]>('searchShows',[]))
       );
+  }
+
+  showDetails(id: number): Observable<Show> {
+     return this.http.get<Show>(`${MovieService.moviesUrl}/shows/${id}`)
+       .pipe(
+         catchError(this.handleError<Show>(`getMovie id=${id}`))
+       );
+  }
+
+  getEpisodes(id: number): Observable<Episode[]> {
+     return this.http.get<Episode[]>(`${MovieService.moviesUrl}/seasons/${id}/episodes`)
+       .pipe(
+         catchError(this.handleError<Episode[]>('getEpisodes', []))
+       );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
