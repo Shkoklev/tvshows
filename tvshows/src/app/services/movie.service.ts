@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ResponseResult} from "../models/tvshows";
 import {Observable} from "rxjs";
+import {of} from "rxjs/observable/of";
+import {catchError} from "rxjs/operators/catchError";
 
 @Injectable()
 export class MovieService {

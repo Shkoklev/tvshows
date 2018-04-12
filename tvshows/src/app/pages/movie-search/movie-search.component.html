@@ -1,1 +1,32 @@
+<div class="input-group">
+  <input #showName type="text" class="form-control" placeholder="Find show..." (keyup)="search(showName.value)">
+  <span>
+        <button class="btn btn-primary" type="button">
+          Search
+        </button>
+     </span>
+</div>
+
+<div class="list-group">
+  <a *ngFor="let item of tvshows$ | async" [routerLink]="['/shows',item.show.id]"
+     class="list-group-item list-group-item-action">
+    <div class="d-flex">
+      <div class="col-lg-2 p-2">
+        <img src="{{item.show.image?.medium}}" alt="Show image" class="img-thumbnail" style="width: 100px">
+      </div>
+      <div class="p-2 col-lg-10">
+        <div class="d-flex justify-content-between">
+          <h5 class="mb-1">{{ item.show.name }}</h5>
+          <p>{{ item.score }}</p>
+        </div>
+        <p class="mb-1" [innerHtml]="item.show.summary">
+        </p>
+        <span *ngFor="let genre of item.show.genres; let last = last">
+          {{ genre }}<span *ngIf="!last"> | </span>
+        </span>
+      </div>
+    </div>
+  </a>
+</div>
+
 
