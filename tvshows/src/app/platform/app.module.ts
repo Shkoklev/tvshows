@@ -8,6 +8,7 @@ import { MovieSearchComponent } from '../pages/movie-search/movie-search.compone
 import { MovieDetailsComponent } from '../pages/movie-details/movie-details.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
+import {MovieService} from "../services/movie.service";
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {AppRoutingModule} from "./app-routing.module";
       HttpClientModule,
       AlertModule.forRoot(),
   ],
-  providers: [],
+  providers: [MovieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
