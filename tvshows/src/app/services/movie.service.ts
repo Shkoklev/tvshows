@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ResponseResult, Show, Episode} from "../models/tvshows";
+import {ResponseResult, Show, Episode, Person} from "../models/tvshows";
 import {Observable} from "rxjs";
 import {of} from "rxjs/observable/of";
 import {catchError} from "rxjs/operators/catchError";
@@ -30,6 +30,13 @@ export class MovieService {
      return this.http.get<Episode[]>(`${MovieService.moviesUrl}/seasons/${id}/episodes`)
        .pipe(
          catchError(this.handleError<Episode[]>('getEpisodes', []))
+       );
+  }
+
+  getCast(id: number): Observable<Person[]> {
+     return this.http.get<Person[]>(`${MovieService.moviesUrl}/shows/${id}/cast`)
+       .pipe(
+         catchError(this.handleError<Person[]>('getCast',[]))
        );
   }
 

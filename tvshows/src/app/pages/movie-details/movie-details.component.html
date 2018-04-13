@@ -1,3 +1,47 @@
-<div *ngIf="tvshow">
-  {{ tvshow.id}}
+<div class="container" *ngIf="tvshow">
+  <a href="{{tvshow.url}}">
+    <h4>
+      {{tvshow.name}}
+    </h4>
+  </a>
+  <div class="row">
+    <div class="col-md-4">
+      <img src='{{tvshow.image.medium}}' class="img-thumbnail"/>
+    </div>
+    <div class="col-md-8">
+      <p [innerHTML]="tvshow.summary"></p>
+      <p>Language: {{tvshow.language}}</p>
+      <p>Genres: {{tvshow.genres}}</p>
+      <p>Status: {{tvshow.status}}</p>
+      <p>Premiered: {{tvshow.premiered}}</p>
+      <p>Official site: <a href="{{tvshow.officialSite}}">{{tvshow.officialSite}}</a></p>
+    </div>
+  </div>
+  <div>
+    <div class="p-50">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Cast</h3>
+          <div *ngFor="let p of cast">
+            <div class="row p-r-20 p-b-10">
+              <div class="col-md-3">
+                <img class="w-100" src="{{p.person.image.medium}}" />
+              </div>
+              <div class="col-md-9 p-t-20 p-b-20 p-l-80 p-r-80">
+                <h5>{{p.person.name}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3>Episodes</h3>
+          <div class="flex-column">
+            <div *ngFor="let e of episodes" class="d-flex flex-row">
+               <h5>S{{e.season}}E{{e.number}} {{e.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
