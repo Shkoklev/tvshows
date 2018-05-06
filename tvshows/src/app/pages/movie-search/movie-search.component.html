@@ -1,14 +1,15 @@
 <div class="input-group">
-  <input #showName type="text" class="form-control" placeholder="Find show..." (keyup)="search(showName.value)">
+  <input #showName type="text" class="form-control" placeholder="Find show..." (keyup)="search(showName.value)"
+  [(ngModel)]="queryName">
   <span>
         <button class="btn btn-primary">
           Search
         </button>
-     </span>
+  </span>
 </div>
 
-<div class="list-group">
-  <a *ngFor="let item of tvshows$ | async" [routerLink]="['/shows',item.show.id]"
+<div class="list-group" *ngIf="queryName">
+  <a *ngFor="let item of tvshows$" [routerLink]="['/shows',item.show.id]"
      class="list-group-item list-group-item-action">
     <div class="d-flex">
       <div class="col-lg-2">
@@ -26,5 +27,4 @@
     </div>
   </a>
 </div>
-
 

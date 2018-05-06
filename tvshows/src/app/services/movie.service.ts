@@ -4,15 +4,17 @@ import {ResponseResult, Show, Episode, Person} from "../models/tvshows";
 import {Observable} from "rxjs";
 import {of} from "rxjs/observable/of";
 import {catchError} from "rxjs/operators/catchError";
+import {Route, ActivatedRoute, Router} from "@angular/router";
 
 @Injectable()
 export class MovieService {
 
   static moviesUrl = 'http://api.tvmaze.com';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router: Router) { }
 
   search(query: string): Observable<ResponseResult[]> {
+    this.router.navigate(['/search'],{ queryParams: { name: query}});
     return this.http.get<ResponseResult[]>(`${MovieService.moviesUrl}/search/shows?q=${query}`)
       .pipe(
         catchError(this.handleError<ResponseResult[]>('searchShows',[]))
